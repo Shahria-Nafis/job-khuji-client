@@ -28,11 +28,9 @@ const ViewDetails = () => {
             });
     }, [id]);
 
-    // Load applications when job is loaded and user is present
     useEffect(() => {
         if (!job || !user) return;
 
-        // If user is poster, load all applications for this job
         if (job.userEmail === user.email) {
             setLoadingApps(true);
             axios.get(`https://job-khuji-server.vercel.app/:3000/applications?jobId=${job._id}`)
@@ -45,7 +43,6 @@ const ViewDetails = () => {
                     setLoadingApps(false);
                 });
         } else {
-            // If non-poster, check whether current user has applied
             axios.get(`https://job-khuji-server.vercel.app/:3000/applications?jobId=${job._id}&applicantEmail=${user.email}`)
                 .then(res => {
                     setHasApplied((res.data || []).length > 0);
@@ -56,9 +53,7 @@ const ViewDetails = () => {
         }
     }, [job, user]);
 
-    // Note: approvals are handled via updateApplication for owners
 
-    // Non-owner: apply for job
     const handleApply = async (message = '') => {
         if (!user) {
             toast.error('Please login to apply');
@@ -87,7 +82,6 @@ const ViewDetails = () => {
         }
     };
 
-    // Owner: approve or reject application
     const updateApplication = async (appId, action) => {
         if (!user) {
             toast.error('Please login');
@@ -102,7 +96,6 @@ const ViewDetails = () => {
             } else {
                 toast.success('Application rejected');
             }
-            // remove or update application locally
             setApplications(prev => prev.filter(a => a._id !== appId));
         } catch (err) {
             console.error('Error updating application:', err);
@@ -136,9 +129,7 @@ const ViewDetails = () => {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200 py-10 px-4">
             <Toaster position="top-center" />
             <div className="max-w-4xl mx-auto">
-                {/* Job Header Card */}
                 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                    {/* Cover Image */}
                     <div className="relative h-80 bg-gradient-to-r from-blue-500 to-purple-600">
                         <img
                             src={job.coverImage || "https://via.placeholder.com/800x400"}
@@ -155,14 +146,11 @@ const ViewDetails = () => {
                         </div>
                     </div>
 
-                    {/* Job Details */}
                     <div className="p-8">
-                        {/* Title */}
                         <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
                             {job.title}
                         </h1>
 
-                        {/* Meta Information */}
                         <div className="flex flex-wrap gap-6 mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
                             <div className="flex items-center gap-2">
                                 <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -199,7 +187,6 @@ const ViewDetails = () => {
                             )}
                         </div>
 
-                        {/* Job Description */}
                         <div className="mb-8">
                             <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
                                 Job Description
@@ -209,7 +196,6 @@ const ViewDetails = () => {
                             </p>
                         </div>
 
-                        {/* Contact Information */}
                         {job.userEmail && (
                             <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 mb-8">
                                 <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
@@ -224,9 +210,7 @@ const ViewDetails = () => {
                             </div>
                         )}
 
-                        {/* Action Buttons */}
                         <div className="flex gap-4 flex-wrap">
-                            {/* Show application UI: owners see applications, others see apply box */}
                                 {user && job.userEmail === user.email ? (
                                     <div className="w-full">
                                         <div className="mb-4">
@@ -294,3 +278,4 @@ const ViewDetails = () => {
 };
 
 export default ViewDetails;
+
