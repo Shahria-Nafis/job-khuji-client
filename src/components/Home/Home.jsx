@@ -58,7 +58,6 @@ const Home = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
-            {/* Enhanced Hero Slider Section */}
             <div className="relative w-full h-[600px] overflow-hidden mb-16">
                 {slides.map((slide, idx) => (
                     <div
@@ -97,9 +96,7 @@ const Home = () => {
                         </div>
                     </div>
                 ))}
-                
-                {/* Navigation Dots */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3">
+                                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3">
                     {slides.map((_, idx) => (
                         <button
                             key={idx}
@@ -113,7 +110,6 @@ const Home = () => {
                     ))}
                 </div>
                 
-                {/* Navigation Arrows */}
                 <button
                     onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
                     className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300"
@@ -128,7 +124,6 @@ const Home = () => {
                 </button>
             </div>
 
-            {/* Stats Section */}
             <div className="bg-gray-50 py-16 px-6 mb-16">
                 <div className="max-w-6xl mx-auto">
                     <div className="grid md:grid-cols-4 gap-8 text-center">
@@ -152,7 +147,6 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Featured Jobs Section */}
             <div className="px-6 mb-16">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12">
@@ -164,11 +158,11 @@ const Home = () => {
                         </p>
                     </div>
                     
-                    {loadingJobs ? (
+                    {loadingJobs? (
                         <div className="flex justify-center items-center py-16">
                             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-400"></div>
                         </div>
-                    ) : jobs.length === 0 ? (
+                    ): jobs.length === 0 ? (
                         <div className="text-center py-16">
                             <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6 flex items-center justify-center">
                                 <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -252,7 +246,6 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Why Choose Us Section */}
             <div className="bg-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:to-gray-900 py-20 px-6 mb-16 transition-colors duration-200">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
@@ -304,7 +297,6 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Categories Section */}
             <div className="px-6 mb-16">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-12">
@@ -333,7 +325,6 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* CTA Section */}
             <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 dark:from-gray-800 dark:via-blue-900 dark:to-purple-900 py-20 px-6 transition-colors duration-200">
                 <div className="max-w-4xl mx-auto text-center text-white">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -363,3 +354,4 @@ const Home = () => {
 };
 
 export default Home;
+
