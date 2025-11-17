@@ -10,7 +10,6 @@ const MyAcceptedTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Load accepted tasks assigned to this user
   useEffect(() => {
     if (!user?.email) {
       toast.error("Please login to view your tasks");
@@ -214,3 +213,4 @@ const MyAcceptedTasks = () => {
 };
 
 export default MyAcceptedTasks;
+
