@@ -11,7 +11,6 @@ const JobApplications = () => {
   const [loading, setLoading] = useState(true);
   const [processingId, setProcessingId] = useState(null);
 
-  // Load applications for jobs posted by this user
   useEffect(() => {
     if (!user?.email) {
       toast.error("Please login to view applications");
@@ -32,7 +31,6 @@ const JobApplications = () => {
       });
   }, [user, navigate]);
 
-  // Handle APPROVE - approve application
   const handleApprove = async (id, applicantName) => {
     if (!window.confirm(`Approve application from "${applicantName}"?\n\nThis will add them to accepted tasks.`)) {
       return;
@@ -54,7 +52,6 @@ const JobApplications = () => {
     }
   };
 
-  // Handle REJECT - reject application
   const handleReject = async (id, applicantName) => {
     if (!window.confirm(`Reject application from "${applicantName}"?`)) {
       return;
@@ -248,3 +245,4 @@ const JobApplications = () => {
 };
 
 export default JobApplications;
+
