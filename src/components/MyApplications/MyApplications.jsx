@@ -11,7 +11,6 @@ const MyApplications = () => {
   const [loading, setLoading] = useState(true);
   const [processingId, setProcessingId] = useState(null);
 
-  // Load applications submitted by this user
   useEffect(() => {
     if (!user?.email) {
       toast.error("Please login to view your applications");
@@ -32,7 +31,6 @@ const MyApplications = () => {
       });
   }, [user, navigate]);
 
-  // Handle CANCEL - cancel application
   const handleCancel = async (id) => {
     if (!window.confirm(`Cancel your application?\n\nThis will remove your application for this job.`)) {
       return;
@@ -215,3 +213,4 @@ const MyApplications = () => {
 };
 
 export default MyApplications;
+
