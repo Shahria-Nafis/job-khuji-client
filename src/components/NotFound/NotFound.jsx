@@ -8,7 +8,6 @@ const NotFound = () => {
         <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center px-4 transition-colors duration-200">
             <div className="max-w-lg w-full text-center">
                 <div className="mb-8">
-                    {/* 404 Illustration */}
                     <div className="relative mb-8">
                         <h1 className="text-9xl font-bold text-gray-200 dark:text-gray-800">404</h1>
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -101,3 +100,4 @@ const NotFound = () => {
 };
 
 export default NotFound;
+
