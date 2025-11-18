@@ -297,33 +297,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="px-6 mb-16">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">Popular Categories</h2>
-                        <p className="text-xl text-gray-600 dark:text-gray-400">Find talent in every field imaginable</p>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                        {[
-                            { name: "Web Development", bgColor: "from-blue-500 to-purple-500", count: "250+" },
-                            { name: "Graphic Design", bgColor: "from-pink-500 to-red-500", count: "180+" },
-                            { name: "Digital Marketing", bgColor: "from-green-500 to-emerald-500", count: "150+" },
-                            { name: "Writing", bgColor: "from-yellow-500 to-orange-500", count: "200+" },
-                            { name: "Video Editing", bgColor: "from-indigo-500 to-blue-500", count: "120+" },
-                            { name: "Mobile Apps", bgColor: "from-purple-500 to-pink-500", count: "100+" }
-                        ].map((category, idx) => (
-                            <div key={idx} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center group cursor-pointer border border-gray-200 dark:border-gray-700">
-                                <div className={`w-12 h-12 bg-gradient-to-r ${category.bgColor} rounded-full mx-auto mb-3 flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                                    <div className="w-6 h-6 bg-white rounded-full opacity-80"></div>
-                                </div>
-                                <h4 className="font-semibold text-gray-800 dark:text-white mb-1">{category.name}</h4>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">{category.count} jobs</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+        
 
             <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 dark:from-gray-800 dark:via-blue-900 dark:to-purple-900 py-20 px-6 transition-colors duration-200">
                 <div className="max-w-4xl mx-auto text-center text-white">
@@ -354,4 +328,5 @@ const Home = () => {
 };
 
 export default Home;
+
 
