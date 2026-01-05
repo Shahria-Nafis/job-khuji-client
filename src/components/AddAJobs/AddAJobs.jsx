@@ -14,6 +14,8 @@ const AddAJobs = () => {
     coverImage: "",
   });
 
+  const [uploading, setUploading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -27,6 +29,11 @@ const AddAJobs = () => {
       return;
     }
 
+    if (!formData.coverImage) {
+      toast.error("Please upload a cover image.");
+      return;
+    }
+
     const newJob = {
       ...formData,
       postedBy: user.displayName || "Anonymous",
@@ -36,7 +43,7 @@ const AddAJobs = () => {
 
     try {
       console.log('Submitting job:', newJob);
-      const res = await axios.post("https://job-khuji-server.vercel.app/:3000/freelance", newJob);
+      const res = await axios.post("http://localhost:5000/freelance", newJob);
       console.log('Response:', res.data);
       
       if (res.data.insertedId || res.data.acknowledged) {
@@ -51,6 +58,35 @@ const AddAJobs = () => {
       
       const errorMessage = error.response?.data?.details || error.response?.data?.error || error.message || "Failed to add job!";
       toast.error(errorMessage);
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append("file", file);
+
+      const uploadRes = await axios.post("http://localhost:5000/upload", formDataUpload, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (uploadRes.data?.url) {
+        setFormData((prev) => ({ ...prev, coverImage: uploadRes.data.url }));
+        toast.success("Image uploaded successfully");
+      } else {
+        toast.error("Upload failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error(
+        error.response?.data?.error || "Failed to upload image. Please try again."
+      );
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -130,21 +166,37 @@ const AddAJobs = () => {
 
         
         <div>
-          <label className="block mb-1 font-semibold text-gray-700 dark:text-gray-300">Cover Image (URL)</label>
+          <label className="block mb-1 font-semibold text-gray-700 dark:text-gray-300">Cover Image</label>
           <input
-            type="text"
-            name="coverImage"
-            value={formData.coverImage}
-            onChange={handleChange}
-            required
-            className="input input-bordered w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
-            placeholder="https://example.com/image.jpg"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="file-input file-input-bordered w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600"
           />
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            Upload an image instead of pasting a link. Max ~10MB.
+          </p>
+          {uploading && (
+            <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">Uploading...</p>
+          )}
+          {formData.coverImage && (
+            <div className="mt-3">
+              <img
+                src={formData.coverImage}
+                alt="Cover preview"
+                className="w-full h-48 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
+              />
+            </div>
+          )}
         </div>
 
         
-        <button type="submit" className="btn bg-blue-600 hover:bg-blue-700 text-white w-full border-0">
-          Add Job
+        <button
+          type="submit"
+          disabled={uploading}
+          className="btn bg-blue-600 hover:bg-blue-700 text-white w-full border-0 disabled:opacity-60"
+        >
+          {uploading ? "Uploading..." : "Add Job"}
         </button>
       </form>
     </div>

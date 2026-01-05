@@ -45,7 +45,7 @@ const Home = () => {
 
     useEffect(() => {
         axios
-            .get("https://job-khuji-server.vercel.app/:3000/freelance")
+            .get("http://localhost:5000/freelance")
             .then((res) => {
                 setJobs(res.data);
                 setLoadingJobs(false);
@@ -58,7 +58,7 @@ const Home = () => {
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
-            <div className="relative w-full h-[600px] overflow-hidden mb-16">
+            <div className="relative w-full min-h-[60vh] max-h-[70vh] overflow-hidden mb-16">
                 {slides.map((slide, idx) => (
                     <div
                         key={idx}
@@ -320,6 +320,193 @@ const Home = () => {
                         >
                             Find Work
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Categories Section */}
+            <div className="max-w-7xl mx-auto px-6 py-16">
+                <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                    Popular Categories
+                </h2>
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    {['Web Development', 'Mobile Apps', 'Design & Creative', 'Writing & Content', 'Digital Marketing', 'Data Science', 'Video & Animation', 'Music & Audio', 'Programming', 'Business'].map((category, index) => (
+                        <div
+                            key={index}
+                            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer group"
+                        >
+                            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
+                                {['💻', '📱', '🎨', '✍️', '📈', '📊', '🎬', '🎵', '⚙️', '💼'][index]}
+                            </div>
+                            <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                {category}
+                            </h3>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Testimonials Section */}
+            <div className="bg-gray-50 dark:bg-gray-800 py-16 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                        What Our Users Say
+                    </h2>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {[
+                            { name: 'Sarah Johnson', role: 'Freelance Designer', text: 'This platform changed my career! I found amazing clients and doubled my income in just 3 months.', rating: 5 },
+                            { name: 'Mike Chen', role: 'Startup Founder', text: 'Found the perfect developer for our project. The quality of talent here is outstanding!', rating: 5 },
+                            { name: 'Emma Davis', role: 'Content Writer', text: 'Easy to use, secure payments, and great support. Highly recommended for both clients and freelancers!', rating: 5 }
+                        ].map((testimonial, index) => (
+                            <div key={index} className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg">
+                                <div className="flex mb-4">
+                                    {[...Array(testimonial.rating)].map((_, i) => (
+                                        <span key={i} className="text-yellow-400 text-2xl">⭐</span>
+                                    ))}
+                                </div>
+                                <p className="text-gray-600 dark:text-gray-400 mb-6 italic">"{testimonial.text}"</p>
+                                <div className="flex items-center">
+                                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mr-4"></div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 dark:text-white">{testimonial.name}</h4>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">{testimonial.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Stats / Impact Section */}
+            <div className="max-w-7xl mx-auto px-6 py-16">
+                <div className="grid lg:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Impact that scales</h2>
+                        <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">Real traction across our marketplace shows how quickly work gets done.</p>
+                        <div className="space-y-4">
+                            {[{ label: "Projects delivered on time", value: 92 }, { label: "Repeat clients", value: 76 }, { label: "Average rating", value: 4.8, max: 5 }].map((stat, idx) => (
+                                <div key={idx}>
+                                    <div className="flex justify-between text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                        <span>{stat.label}</span>
+                                        <span>{stat.max ? `${stat.value}/${stat.max}` : `${stat.value}%`}</span>
+                                    </div>
+                                    <div className="w-full h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
+                                            style={{ width: stat.max ? `${(stat.value / stat.max) * 100}%` : `${stat.value}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        {[{ title: "Active clients", value: "8.4K" }, { title: "Jobs posted this week", value: "1.1K" }, { title: "Avg. budget", value: "$1,250" }, { title: "Countries served", value: "42" }].map((item, idx) => (
+                            <div key={idx} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-md">
+                                <p className="text-sm text-gray-500 dark:text-gray-400">{item.title}</p>
+                                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{item.value}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* How It Works Section */}
+            <div className="max-w-7xl mx-auto px-6 py-16">
+                <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                    How It Works
+                </h2>
+                <div className="grid md:grid-cols-4 gap-8">
+                    {[
+                        { step: '1', title: 'Create Account', desc: 'Sign up in seconds and build your profile' },
+                        { step: '2', title: 'Post or Browse', desc: 'Post a job or browse available projects' },
+                        { step: '3', title: 'Connect & Work', desc: 'Connect with the right match and start working' },
+                        { step: '4', title: 'Get Paid', desc: 'Complete work and receive secure payment' }
+                    ].map((item, index) => (
+                        <div key={index} className="text-center relative">
+                            <div className="w-16 h-16 rounded-full bg-blue-600 text-white text-2xl font-bold flex items-center justify-center mx-auto mb-4">
+                                {item.step}
+                            </div>
+                            {index < 3 && (
+                                <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-blue-300 dark:bg-blue-700"></div>
+                            )}
+                            <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-2">{item.title}</h3>
+                            <p className="text-gray-600 dark:text-gray-400">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* FAQ Section */}
+            <div className="bg-gray-50 dark:bg-gray-800 py-16 px-6">
+                <div className="max-w-4xl mx-auto">
+                    <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                        Frequently Asked Questions
+                    </h2>
+                    <div className="space-y-4">
+                        {[
+                            { q: 'How do I get started?', a: 'Simply create an account, complete your profile, and start browsing jobs or posting projects!' },
+                            { q: 'What are the fees?', a: 'We charge a small service fee on completed projects. Posting jobs is completely free.' },
+                            { q: 'Is my payment secure?', a: 'Yes! We use industry-standard encryption and secure escrow system for all transactions.' },
+                            { q: 'How do I find the right freelancer?', a: 'Use our advanced filters, review portfolios, ratings, and conduct interviews before hiring.' }
+                        ].map((faq, index) => (
+                            <details key={index} className="bg-white dark:bg-gray-900 rounded-lg shadow p-6 group">
+                                <summary className="font-semibold text-gray-900 dark:text-white cursor-pointer list-none flex justify-between items-center">
+                                    {faq.q}
+                                    <span className="text-2xl group-open:rotate-180 transition-transform">›</span>
+                                </summary>
+                                <p className="mt-4 text-gray-600 dark:text-gray-400">{faq.a}</p>
+                            </details>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Newsletter Section */}
+            <div className="max-w-7xl mx-auto px-6 py-16">
+                <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-center text-white">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay in the Loop</h2>
+                    <p className="text-xl mb-8">Subscribe to get the latest jobs and opportunities delivered to your inbox</p>
+                    <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="flex-1 px-6 py-3 rounded-lg text-gray-900 focus:ring-4 focus:ring-white/50 outline-none"
+                        />
+                        <button className="px-8 py-3 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Blog Preview Section */}
+            <div className="bg-gray-50 dark:bg-gray-800 py-16 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex justify-between items-center mb-12">
+                        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Latest from Our Blog</h2>
+                        <button 
+                            onClick={() => navigate('/blog')}
+                            className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                        >
+                            View All →
+                        </button>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {[
+                            { title: '10 Tips for Successful Freelancing', date: 'Jan 2, 2026', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&q=80' },
+                            { title: 'Building a Strong Portfolio', date: 'Dec 28, 2025', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80' },
+                            { title: 'The Future of Remote Work', date: 'Dec 25, 2025', image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80' }
+                        ].map((blog, index) => (
+                            <div key={index} className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                                <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover" />
+                                <div className="p-6">
+                                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{blog.date}</p>
+                                    <h3 className="font-bold text-lg text-gray-900 dark:text-white">{blog.title}</h3>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

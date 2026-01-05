@@ -18,7 +18,7 @@ const MyJobs = () => {
     }
 
     axios
-      .get(`https://job-khuji-server.vercel.app/:3000/freelance/${user.email}`)
+      .get(`http://localhost:5000/freelance/${user.email}`)
       .then((res) => {
         setJobs(res.data);
         setLoading(false);
@@ -34,7 +34,7 @@ const MyJobs = () => {
     if (!window.confirm("Are you sure you want to delete this job?")) return;
 
     try {
-      await axios.delete(`https://job-khuji-server.vercel.app/:3000/freelance/${id}`);
+      await axios.delete(`http://localhost:5000/freelance/${id}`);
       setJobs((prev) => prev.filter((job) => job._id !== id));
       toast.success("Job deleted successfully!");
     } catch (err) {

@@ -18,7 +18,7 @@ const MyAcceptedTasks = () => {
     }
 
     axios
-      .get(`https://job-khuji-server.vercel.app/:3000/acceptedTasks?userEmail=${user.email}`)
+      .get(`http://localhost:5000/acceptedTasks?userEmail=${user.email}`)
       .then((res) => {
         setTasks(res.data);
         setLoading(false);
@@ -36,7 +36,7 @@ const MyAcceptedTasks = () => {
     }
 
     try {
-      await axios.patch(`https://job-khuji-server.vercel.app/:3000/acceptedTasks/${id}`, {
+      await axios.patch(`http://localhost:5000/acceptedTasks/${id}`, {
         status: 'completed'
       });
       setTasks((prev) => prev.map(task => 

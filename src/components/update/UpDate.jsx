@@ -28,7 +28,7 @@ const UpDate = () => {
         }
 
         axios
-            .get(`https://job-khuji-server.vercel.app/:3000/freelance/job/${id}`)
+            .get(`http://localhost:5000/freelance/job/${id}`)
             .then((res) => {
                 const jobData = res.data;
                 
@@ -61,7 +61,7 @@ const UpDate = () => {
         setUpdating(true);
         
         try {
-            await axios.put(`https://job-khuji-server.vercel.app/:3000/freelance/${id}`, job);
+            await axios.put(`http://localhost:5000/freelance/${id}`, job);
             toast.success("Job updated successfully!");
             setTimeout(() => navigate("/allJobs"), 1500);
         } catch (err) {
