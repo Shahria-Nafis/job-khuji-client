@@ -24,7 +24,7 @@ const AllJobs = () => {
   useEffect(() => {
     const load = async (pageToLoad = 1) => {
       try {
-        const res = await axios.get("http://localhost:5000/freelance");
+        const res = await axios.get("https://job-khuji-server.vercel.app/freelance");
         const all = res.data || [];
 
         // Simulate server pagination client-side for now
@@ -59,7 +59,7 @@ const AllJobs = () => {
     if (isFetchingMore || !hasMore) return;
     setIsFetchingMore(true);
     try {
-      const res = await axios.get("http://localhost:5000/freelance");
+      const res = await axios.get("https://job-khuji-server.vercel.app/freelance");
       const all = res.data || [];
       const nextPage = page + 1;
       const sliceEnd = nextPage * pageSize;
@@ -307,4 +307,5 @@ const Filters = ({
     </div>
   </div>
 );
+
 
