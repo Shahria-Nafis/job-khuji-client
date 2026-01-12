@@ -43,7 +43,7 @@ const AddAJobs = () => {
 
     try {
       console.log('Submitting job:', newJob);
-      const res = await axios.post("http://localhost:5000/freelance", newJob);
+      const res = await axios.post("https://job-khuji-server.vercel.app/freelance", newJob);
       console.log('Response:', res.data);
       
       if (res.data.insertedId || res.data.acknowledged) {
@@ -70,7 +70,7 @@ const AddAJobs = () => {
       const formDataUpload = new FormData();
       formDataUpload.append("file", file);
 
-      const uploadRes = await axios.post("http://localhost:5000/upload", formDataUpload, {
+      const uploadRes = await axios.post("https://job-khuji-server.vercel.app/upload", formDataUpload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

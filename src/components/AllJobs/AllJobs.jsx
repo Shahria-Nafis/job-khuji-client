@@ -308,4 +308,3 @@ const Filters = ({
   </div>
 );
 
-

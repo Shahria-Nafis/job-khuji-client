@@ -20,10 +20,10 @@ const DashboardHome = () => {
         const fetchData = async () => {
             try {
                 const [allJobsRes, myJobsRes, myApplicationsRes, myAcceptedTasksRes] = await Promise.all([
-                    axios.get('http://localhost:5000/freelance'),
-                    axios.get(`http://localhost:5000/freelance/${user?.email}`),
-                    axios.get(`http://localhost:5000/applications?applicantEmail=${user?.email}`),
-                    axios.get(`http://localhost:5000/acceptedTasks?userEmail=${user?.email}`),
+                    axios.get('https://job-khuji-server.vercel.app/freelance'),
+                    axios.get(`https://job-khuji-server.vercel.app/freelance/${user?.email}`),
+                    axios.get(`https://job-khuji-server.vercel.app/applications?applicantEmail=${user?.email}`),
+                    axios.get(`https://job-khuji-server.vercel.app/acceptedTasks?userEmail=${user?.email}`),
                 ]);
 
                 setStats({

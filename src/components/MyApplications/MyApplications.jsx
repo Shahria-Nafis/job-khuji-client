@@ -19,7 +19,7 @@ const MyApplications = () => {
     }
 
     axios
-      .get(`http://localhost:5000/applications?applicantEmail=${user.email}`)
+      .get(`https://job-khuji-server.vercel.app/applications?applicantEmail=${user.email}`)
       .then((res) => {
         setApplications(res.data);
         setLoading(false);
@@ -38,7 +38,7 @@ const MyApplications = () => {
 
     setProcessingId(id);
     try {
-      await axios.delete(`http://localhost:5000/applications/${id}`);
+      await axios.delete(`https://job-khuji-server.vercel.app/applications/${id}`);
       setApplications((prev) => prev.filter((app) => app._id !== id));
       toast.success("Application cancelled!");
     } catch (err) {

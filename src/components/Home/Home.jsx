@@ -45,7 +45,7 @@ const Home = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/freelance")
+            .get("https://job-khuji-server.vercel.app/freelance")
             .then((res) => {
                 setJobs(res.data);
                 setLoadingJobs(false);

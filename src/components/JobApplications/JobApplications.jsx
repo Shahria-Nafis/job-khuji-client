@@ -19,7 +19,7 @@ const JobApplications = () => {
     }
 
     axios
-      .get(`http://localhost:5000/applications?posterEmail=${user.email}`)
+      .get(`https://job-khuji-server.vercel.app/applications?posterEmail=${user.email}`)
       .then((res) => {
         setApplications(res.data);
         setLoading(false);
@@ -38,7 +38,7 @@ const JobApplications = () => {
 
     setProcessingId(id);
     try {
-      await axios.patch(`http://localhost:5000/applications/${id}`, {
+      await axios.patch(`https://job-khuji-server.vercel.app/applications/${id}`, {
         action: 'approve',
         approverEmail: user.email
       });
@@ -59,7 +59,7 @@ const JobApplications = () => {
 
     setProcessingId(id);
     try {
-      await axios.patch(`http://localhost:5000/applications/${id}`, {
+      await axios.patch(`https://job-khuji-server.vercel.app/applications/${id}`, {
         action: 'reject',
         approverEmail: user.email
       });

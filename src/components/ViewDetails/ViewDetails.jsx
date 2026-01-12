@@ -17,7 +17,7 @@ const ViewDetails = () => {
     const [hasApplied, setHasApplied] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/freelance/job/${id}`)
+        axios.get(`https://job-khuji-server.vercel.app/freelance/job/${id}`)
             .then(res => {
                 setJob(res.data);
                 setLoading(false);
@@ -33,7 +33,7 @@ const ViewDetails = () => {
 
         if (job.userEmail === user.email) {
             setLoadingApps(true);
-            axios.get(`http://localhost:5000/applications?jobId=${job._id}`)
+            axios.get(`https://job-khuji-server.vercel.app/applications?jobId=${job._id}`)
                 .then(res => {
                     setApplications(res.data || []);
                     setLoadingApps(false);
@@ -43,7 +43,7 @@ const ViewDetails = () => {
                     setLoadingApps(false);
                 });
         } else {
-            axios.get(`http://localhost:5000/applications?jobId=${job._id}&applicantEmail=${user.email}`)
+            axios.get(`https://job-khuji-server.vercel.app/applications?jobId=${job._id}&applicantEmail=${user.email}`)
                 .then(res => {
                     setHasApplied((res.data || []).length > 0);
                 })
@@ -73,7 +73,7 @@ const ViewDetails = () => {
                 appliedAt: new Date().toISOString(),
                 status: 'pending'
             };
-            await axios.post('http://localhost:5000/applications', payload);
+            await axios.post('https://job-khuji-server.vercel.app/applications', payload);
             setHasApplied(true);
             toast.success('Application submitted');
         } catch (err) {
@@ -90,7 +90,7 @@ const ViewDetails = () => {
         }
         setProcessingAppId(appId);
         try {
-            await axios.patch(`http://localhost:5000/applications/${appId}`, { action, approverEmail: user.email });
+            await axios.patch(`https://job-khuji-server.vercel.app/applications/${appId}`, { action, approverEmail: user.email });
             if (action === 'approve') {
                 toast.success('Applicant approved — added to accepted tasks');
             } else {
