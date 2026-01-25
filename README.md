@@ -1,9 +1,4 @@
 
----
-
----
-
-# ✅ 2) JobKhuji (Freelance Marketplace) — README.md
 
 ```md
 # 💼 JobKhuji – Freelance Marketplace
@@ -116,3 +111,4 @@ Live Website: https://job-khuji-client.vercel.app
 Requirement Doc: B12-A10_category-0017 (Freelance MarketPlace)
 
 Prepared with ❤️ for JobKhuji
+
